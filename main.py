@@ -7,7 +7,7 @@ import requests
 import schedule
 import time
 
-BASE_URL = "https://guldentech.com/austinapi/bdayemail"
+BASE_URL = os.getenv("BASE_URL")
 
 JOKE_URL = "https://us-central1-dadsofunny.cloudfunctions.net/DadJokes/random/type/"
 
@@ -50,7 +50,7 @@ def main():
             email = email.decode("utf-8")
             send_email(name, email)
 
-    
+
 schedule.every().day.at("06:00").do(main)
 
 while True:
