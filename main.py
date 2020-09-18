@@ -51,5 +51,12 @@ def main():
             send_email(name, email)
 
     
-if __name__ == "__main__":
-    main()
+schedule.every().day.at("06:00").do(main)
+
+while True:
+    try:
+        schedule.run_pending()
+        time.sleep(1)
+    except Exception as identifier:
+        print(identifier)
+        time.sleep(1)
