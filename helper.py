@@ -6,11 +6,6 @@ def main():
                          password=os.getenv("REDIS_PASS"))
     # Using a hash
     # client.hset('bday', 'First Last Mon 01', 'email@domain')
-    
-
-    
-    
-
 
 if __name__ == "__main__":
     main()
