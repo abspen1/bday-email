@@ -26,12 +26,12 @@ def get_formatted_date():
     return date
 
 
-def send_email(name, email):
+def send_email(name, email, auth):
     joke = get_joke()
     for item in joke:
         setup = item["setup"]
         punchline = item["punchline"]
-    dictionary = {"Name": name, "Email": email, "JokeSetup": setup, "JokePunchLine": punchline}
+    dictionary = {"Name": name, "Email": email, "JokeSetup": setup, "JokePunchLine": punchline, "Auth": auth}
     dictionary = json.dumps(dictionary, indent=4)
     x = requests.post(BASE_URL, data=dictionary)
 
@@ -48,7 +48,8 @@ def main():
         if date == name_date.decode("utf-8")[-6:]:
             name = name_date.decode("utf-8")[:-7]
             email = email.decode("utf-8")
-            send_email(name, email)
+            auth = client.get('back-end-auth').decode("utf-8")
+            send_email(name, email, auth)
 
 
 schedule.every().day.at("06:00").do(main)

@@ -11,3 +11,9 @@ Pretty simple code
 * Get our dictionary of people's name/birthday(concatenated) and their email
 * Check if any of them have a birthday today
 * If they do, post request our backend email sender on my website
+
+## Secure
+* Decided to add a layer of security to my back-end emailer
+* Since this is open-source, anyone could see the url for my back-end api
+    * Knowing this, there is now required authentification when trying to email a birthday message
+* BASE_URL is also now hidden as well
