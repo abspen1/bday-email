@@ -17,7 +17,9 @@ Pretty simple code
     * Knowing this, there is now required authentification when trying to email a birthday message
 * BASE_URL is also now hidden as well
 
-# To Do
+# To Do (Completed)
 * Recreate this code in Go and remove the api calls to my back-end
 * I can just have the Go script run as a stand-alone application
 * This will be good for learning go and I think a better implementation for this script
+
+### Above To Dos are completed, however need to figure out a run scheduler
