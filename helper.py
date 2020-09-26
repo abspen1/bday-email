@@ -18,5 +18,5 @@ def main(name, birthdate, email):
     
 
 if __name__ == "__main__":
-    main()
+    main("Test with Go", "Sep 26", "abspencer2097@yahoo.com")
     get_bdays()
