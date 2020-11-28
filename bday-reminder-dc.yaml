@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bday-reminder
+  namespace: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bday-reminder
+  template:
+    metadata:
+      labels:
+        app: bday-reminder
+    spec:
+      containers:
+      - name: bday-reminder
+        image: registry:5000/bday-emails
+        imagePullPolicy: Always
+        env:
+        - name: BASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: BASE_URL
+              name: go-back-end
+        - name: BACK-END-AUTH
+          valueFrom:
+            secretKeyRef:
+              key: BACK-END-AUTH
+              name: go-back-end
+        - name: REDIS_PASS
+          valueFrom:
+            secretKeyRef:
+              key: REDIS_PASS
+              name: redis-pass
+        - name: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              key: REDIS_HOST
+              name: redis-pass
