@@ -20,6 +20,15 @@ def add_bday(name, birthdate, email):
     concatenate = name + " " + birthdate
     client.hset('bday', concatenate, email)
 
+
+def get_bdays():
+    client = redis.Redis(host=os.getenv("REDIS_HOST"), port=6379, db=6,
+                         password=os.getenv("REDIS_PASS"))
+    dictionary = client.hgetall('bday')
+    for item, key in dictionary.items():
+        print(item, key, "\n\n")
+
+
 def get_joke():
     types = ("general", "knock-knock")
     index = random.randint(0,1)
@@ -60,22 +69,7 @@ def main():
             send_email(name, email, auth)
 
 
-add_bday("Mom", "Sep 14", "abspencer2097@yahoo.com")
-add_bday("Dad", "Aug 24", "abspencer2097@yahoo.com")
-add_bday("Gretchen", "Apr 06", "abspencer2097@yahoo.com")
-add_bday("Momma", "Dec 14", "abspencer2097@yahoo.com")
-add_bday("Papa", "Jan 06", "abspencer2097@yahoo.com")
-add_bday("John Dowell", "Sep 21", "abspencer2097@yahoo.com")
-add_bday("Raegan", "Feb 21", "abspencer2097@yahoo.com")
-add_bday("Jared", "Oct 12", "abspencer2097@yahoo.com")
-add_bday("Grandad", "Dec 18", "abspencer2097@yahoo.com")
-add_bday("Kyler", "Jun 17", "abspencer2097@yahoo.com")
-add_bday("Drake", "Oct 13", "abspencer2097@yahoo.com")
-add_bday("Con Don", "Sep 30", "abspencer2097@yahoo.com")
-add_bday("Josh Millmore", "Jan 17", "abspencer2097@yahoo.com")
-add_bday("Ashley Dierkes", "Oct 09", "abspencer2097@yahoo.com")
-add_bday("Matt Nicklas", "Nov 14", "abspencer2097@yahoo.com")
-add_bday("Emily Douglas", "Jan 16", "abspencer2097@yahoo.com")
+get_bdays()
 schedule.every().day.at("06:00").do(main)
 
 while True:
