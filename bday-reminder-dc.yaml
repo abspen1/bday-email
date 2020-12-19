@@ -13,9 +13,11 @@ spec:
       labels:
         app: bday-reminder
     spec:
+      imagePullSecrets:
+      - name: pipeline-docker-registry
       containers:
       - name: bday-reminder
-        image: registry:5000/bday-emails
+        image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
         imagePullPolicy: Always
         env:
         - name: BASE_URL

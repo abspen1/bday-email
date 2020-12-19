@@ -69,6 +69,7 @@ def main():
             send_email(name, email, auth)
 
 
+add_bday("TEST", "Dec 20", "abspencer2097@yahoo.com")
 get_bdays()
 schedule.every().day.at("06:00").do(main)
 
