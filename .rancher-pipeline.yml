@@ -1,19 +1,29 @@
 stages:
-  - name: Build & Publish
-    when:
-      branch: master
-      event: [push, pull request]
-    steps:
-      - publishImageConfig:
-          dockerfilePath: ./Dockerfile
-          buildContext: .
-          tag: bday-emails:${CICD_EXECUTION_SEQUENCE}
-        env:
-          PLUGIN_MTU: 1450
-  - name: Deploy
-    when:
-      branch: master
-      event: [push, pull request]
-    steps:
-      - applyYamlConfig:
-          path: ./bday-reminder-dc.yaml
+- name: Build & Publish
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: bday-emails:${CICD_EXECUTION_SEQUENCE}
+    env:
+      PLUGIN_MTU: "1450"
+  when:
+    branch: {}
+    event:
+      include:
+      - push
+      - pull request
+- name: Deploy
+  steps:
+  - applyYamlConfig:
+      path: ./bday-reminder-dc.yaml
+  when:
+    branch: {}
+    event:
+      include:
+      - push
+      - pull request
+branch:
+  include:
+  - main
+notification: {}
